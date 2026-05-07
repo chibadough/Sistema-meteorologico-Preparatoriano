@@ -12,8 +12,6 @@ La estación puede medir variables como:
 - Temperatura
 - Humedad
 - Presión atmosférica
-- Altitud aproximada
-- Movimiento e inclinación
 - Otras variables dependiendo de los sensores instalados
 
 El sistema está pensado para proyectos educativos STEM, investigación escolar y monitoreo climático local.
@@ -83,8 +81,6 @@ The station can measure variables such as:
 - Temperature
 - Humidity
 - Atmospheric pressure
-- Approximate altitude
-- Motion and inclination
 - Other variables depending on the installed sensors
 
 The system is designed for STEM educational projects, school research, and local climate monitoring.
