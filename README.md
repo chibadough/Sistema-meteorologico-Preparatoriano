@@ -2,7 +2,7 @@
 
 ## Español
 
-Código de la estación meteorológica **Balun Canán** ubicada en :contentReference[oaicite:0]{index=0}.
+Código de la estación meteorológica **Balun Canán** ubicada en Comitan de Dominguez.
 
 ### ¿Qué hace este proyecto?
 
@@ -73,7 +73,7 @@ Las contribuciones son bienvenidas para:
 
 ## English
 
-Code for the **Balun Canán** weather station located in :contentReference[oaicite:1]{index=1}.
+Code for the **Balun Canán** weather station located in Comitan de Dominguez.
 
 ### What does this project do?
 
