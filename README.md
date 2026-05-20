@@ -24,7 +24,8 @@ Este repositorio contiene el código fuente utilizado para leer sensores, proces
 - Monitoreo de presión atmosférica mediante BMP280
 - Medición de temperatura ambiental
 - Monitoreo de humedad relativa
-- Sistema de pruebas con doble sensor DHT11
+- Medición de velocidad del viento y direccion.
+- Mediciones pluviales
 - Comparación entre temperatura exterior y en sombra
 - Salida de telemetría en tiempo real por Serial
 - Arquitectura modular basada en Arduino
@@ -135,7 +136,8 @@ This repository contains the source code used to read sensor data, process envir
 - Atmospheric pressure monitoring using BMP280
 - Environmental temperature measurement
 - Relative humidity monitoring
-- Dual DHT11 sensor testing system
+- Wind speed and direction measurement
+- Rainfall measurement
 - Outdoor and shaded temperature comparison
 - Real-time Serial telemetry output
 - Arduino-based modular architecture
