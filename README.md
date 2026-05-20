@@ -109,10 +109,6 @@ Las sugerencias, mejoras y comentarios son bienvenidos.
 
 Posibles mejoras futuras incluyen:
 
-- Sistemas de almacenamiento de datos
-- Telemetría inalámbrica
-- Integración de pantallas OLED o LCD
-- Operación mediante energía solar
 - Dashboard web para monitoreo climático
 - Sensores más precisos
 - Soporte para tarjetas SD
@@ -224,10 +220,6 @@ Suggestions, improvements, and feedback are welcome.
 
 Possible future improvements include:
 
-- Data logging systems
-- Wireless telemetry
-- OLED or LCD display integration
-- Solar-powered operation
 - Online weather monitoring dashboard
 - More accurate sensors
 - SD card storage support
