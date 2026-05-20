@@ -3,18 +3,15 @@
 #include <Wire.h>
 #include <DHT.h>
 #include <DHT_U.h>
-
-
+int pinV =7;
 
 
 Adafruit_BMP280 bmp;
 
-  #define DHTPIN1 2
-  #define DHTPIN2 7
+  #define DHTPIN 5
   #define DHTTYPE DHT11
 
-DHT dht1(DHTPIN1,DHTTYPE);
-DHT dht2(DHTPIN2,DHTTYPE); //solo para pruebas
+DHT dht(DHTPIN,DHTTYPE);
 
   float temp;
   float pres;
@@ -22,36 +19,46 @@ DHT dht2(DHTPIN2,DHTTYPE); //solo para pruebas
 
 void setup() {
  Serial.begin(9600);
- dht1.begin();
- dht2.begin(); //SOMBRA
+ dht.begin();
  Wire.begin();
  bmp.begin(0x76);
+  pinMode(pinV,OUTPUT);
 }
 
 void loop() {
-  float tem1 = dht1.readTemperature();
-  float hum1 = dht1.readHumidity();
-  float tem2 = dht2.readTemperature(); //SOMBRA
+  float tem1 = dht.readTemperature();
+  float hum1 = dht.readHumidity();
  temp = bmp.readTemperature();
  pres = bmp.readPressure()/100;
 
+ if(isnan(tem1) || isnan(hum1)){
+ Serial.print("Reinciando EL dht11");
+ digitalWrite(pinV,LOW);
+ delay(1000);
+ digitalWrite(pinV,HIGH);
+ } else{
+ digitalWrite(pinV,HIGH);
+ }
+  
+  Serial.println("=====Datos generales=====");
   Serial.print("temperatura actual: ");
   Serial.print(temp);
-  Serial.print("C*");
-  Serial.print("pression atmosferica: ");
+  Serial.println("C*");
+  Serial.print("presion atmosferica: ");
   Serial.print(pres);
-  Serial.print("hpa");
+  Serial.println("hpa");
+  Serial.println("");
 
-
+  Serial.println("=====Temperatura en sombra y humedad relativa====");
   Serial.print("temperatura actual exterior: ");
   Serial.print(tem1);
-  Serial.print("C* ");
-  Serial.print("temperatura actual sombra: "); // Unicamente para pruebas.
-  Serial.print(tem2);
-  Serial.print("C* ");
+  Serial.println("C* ");
   Serial.print(" humedad relativa: ");
   Serial.print(hum1);
-  Serial.print("% ");
+  Serial.println("% ");
+    Serial.println("");
+
 
  delay(4000);
-}
+
+ }
