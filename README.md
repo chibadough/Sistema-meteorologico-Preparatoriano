@@ -98,7 +98,7 @@ El proyecto fue creado como parte de una iniciativa educativa relacionada con:
 
 ## Notas
 
-- Uno de los sensores DHT11 actualmente se utiliza únicamente para pruebas y mediciones en sombra.
+- Aun no se programa las funciones de mediciones de velocidad del viento y pluviales debido a la falta de estos sensores.
 - La precisión de los sensores puede variar dependiendo de las condiciones ambientales y la calibración.
 - Este repositorio funciona tanto como recurso de aprendizaje como referencia funcional de prototipo.
 
@@ -210,7 +210,7 @@ The project was created as part of an educational initiative connected to:
 
 ## Notes
 
-- One of the DHT11 sensors is currently used only for testing and shaded-environment measurements.
+- The wind speed and rainfall measurement functions have not yet been programmed due to the lack of these sensors.
 - Sensor accuracy may vary depending on environmental conditions and calibration.
 - This repository serves as both a learning resource and a functional prototype reference.
 
