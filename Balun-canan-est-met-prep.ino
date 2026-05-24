@@ -60,7 +60,7 @@ void loop() {
  Serial.println("PROBLEMA CON EL DHT11: REVISAR");
  } else {
  digitalWrite(pinV, HIGH);
- digitalWrite(pinV2, HIGH);
+ digitalWrite(pinV2, LOW);
  }
 
  if (isnan(temp) || isnan(pres)){
