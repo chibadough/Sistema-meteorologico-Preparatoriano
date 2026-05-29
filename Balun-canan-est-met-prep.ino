@@ -5,6 +5,10 @@
 #include <DHT_U.h>
 int pinV =7;
 int pinV2 =4;
+int Ane = A3;
+int l1;
+float volt;
+float vel;
 
 
 Adafruit_BMP280 bmp;
@@ -32,6 +36,7 @@ void setup() {
  bmp.begin(0x76);
   pinMode(pinV,OUTPUT);
   pinMode(pinV2,OUTPUT);
+  pinMode(Ane,INPUT);
 }
 
 void loop() {
@@ -39,6 +44,10 @@ void loop() {
   float hum1 = dht.readHumidity();
  temp = bmp.readTemperature();
  pres = bmp.readPressure()/100;
+ l1 = analogRead(Ane);
+ volt = l1*(5000.0/1023.0); //voltaje (mv) obtenido del anemometro
+ vel = 0.34 * volt; // funcion f(x) = 3.4(x) correspondiente al anemometro
+
  
 
  if((isnan(tem1) || isnan(hum1))&& advertencia1 == false){
@@ -67,6 +76,8 @@ void loop() {
   Serial.println("ERROR CON EL BMP280: REVISAR PUESTO QUE NO HAY REPUESTO");
  }
 
+ 
+
 
   
   Serial.println("=====Datos generales=====");
@@ -76,6 +87,9 @@ void loop() {
   Serial.print("presion atmosferica: ");
   Serial.print(pres);
   Serial.println("hpa");
+   Serial.print("Velocidad del viento: ");
+  Serial.print(vel);
+  Serial.println("Km/h");
   Serial.println("");
 
   Serial.println("=====Temperatura en sombra y humedad relativa====");
