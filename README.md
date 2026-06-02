@@ -21,7 +21,7 @@ Este repositorio contiene el código fuente utilizado para leer sensores, proces
 
 ## Características
 
-- Monitoreo de presión atmosférica mediante BMP280
+- Monitoreo de presión atmosférica mediante BME280
 - Medición de temperatura ambiental
 - Monitoreo de humedad relativa
 - Medición de velocidad del viento y direccion.
@@ -37,7 +37,7 @@ Este repositorio contiene el código fuente utilizado para leer sensores, proces
 El proyecto utiliza:
 
 - Microcontrolador compatible con Arduino
-- Sensor atmosférico BMP280
+- Sensor atmosférico BME280
 - Sensores DHT11 de humedad y temperatura
 - Bus de comunicación I2C
 - Salida Serial para telemetría
@@ -49,7 +49,7 @@ El proyecto utiliza:
 Este proyecto utiliza las siguientes librerías de Arduino:
 
 - `Wire.h`
-- `Adafruit_BMP280`
+- `Adafruit_BME280`
 - `Adafruit_Sensor`
 - `DHT`
 - `DHT_U`
@@ -60,10 +60,10 @@ Este proyecto utiliza las siguientes librerías de Arduino:
 
 Agradecimientos especiales a los desarrolladores y mantenedores de las librerías de código abierto utilizadas en este proyecto:
 
-- [Adafruit BMP280 Library](https://github.com/adafruit/Adafruit_BMP280_Library?utm_source=chatgpt.com)
-- [Adafruit Unified Sensor Library](https://github.com/adafruit/Adafruit_Sensor?utm_source=chatgpt.com)
-- [DHT Sensor Library by Adafruit](https://github.com/adafruit/DHT-sensor-library?utm_source=chatgpt.com)
-- [Arduino Wire Library Documentation](https://www.arduino.cc/reference/en/language/functions/communication/wire/?utm_source=chatgpt.com)
+- [Adafruit BME280 Library](https://github.com/adafruit/Adafruit_BME280_Library)
+- [Adafruit Unified Sensor Library](https://github.com/adafruit/Adafruit_Sensor)
+- [DHT Sensor Library by Adafruit](https://github.com/adafruit/DHT-sensor-library)
+- [Arduino Wire Library Documentation](https://www.arduino.cc/reference/en/language/functions/communication/wire/)
 
 Este proyecto no sería posible sin la comunidad open-source de Arduino y STEM.
 
@@ -133,7 +133,7 @@ This repository contains the source code used to read sensor data, process envir
 
 ## Features
 
-- Atmospheric pressure monitoring using BMP280
+- Atmospheric pressure monitoring using BME280
 - Environmental temperature measurement
 - Relative humidity monitoring
 - Wind speed and direction measurement
@@ -149,7 +149,7 @@ This repository contains the source code used to read sensor data, process envir
 The project uses:
 
 - Arduino-compatible microcontroller
-- BMP280 atmospheric pressure sensor
+- BME280 atmospheric pressure sensor
 - DHT11 humidity and temperature sensors
 - I2C communication bus
 - Serial telemetry output
@@ -161,7 +161,7 @@ The project uses:
 This project uses the following Arduino libraries:
 
 - `Wire.h`
-- `Adafruit_BMP280`
+- `Adafruit_BME280`
 - `Adafruit_Sensor`
 - `DHT`
 - `DHT_U`
@@ -172,10 +172,10 @@ This project uses the following Arduino libraries:
 
 Special thanks to the developers and maintainers of the open-source libraries used in this project:
 
-- [Adafruit BMP280 Library](https://github.com/adafruit/Adafruit_BMP280_Library?utm_source=chatgpt.com)
-- [Adafruit Unified Sensor Library](https://github.com/adafruit/Adafruit_Sensor?utm_source=chatgpt.com)
-- [DHT Sensor Library by Adafruit](https://github.com/adafruit/DHT-sensor-library?utm_source=chatgpt.com)
-- [Arduino Wire Library Documentation](https://www.arduino.cc/reference/en/language/functions/communication/wire/?utm_source=chatgpt.com)
+- [Adafruit BME280 Library](https://github.com/adafruit/Adafruit_BME280_Library)
+- [Adafruit Unified Sensor Library](https://github.com/adafruit/Adafruit_Sensor)
+- [DHT Sensor Library by Adafruit](https://github.com/adafruit/DHT-sensor-library)
+- [Arduino Wire Library Documentation](https://www.arduino.cc/reference/en/language/functions/communication/wire/)
 
 This project would not be possible without the open-source Arduino and STEM communities.
 
