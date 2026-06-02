@@ -1,5 +1,7 @@
-#include <Adafruit_BMP280.h>
-#include <Adafruit_Sensor.h>
+//Hazme un favor y revisa el codigo mientas escuches:
+//Super Ponybeat-Mirai Star! 
+//Brony FOREVER
+#include <Adafruit_BME280.h>
 #include <Wire.h>
 #include <DHT.h>
 #include <DHT_U.h>
@@ -10,8 +12,6 @@ int l1;
 float volt;
 float vel;
 
-
-Adafruit_BMP280 bmp;
 
 bool advertencia1 = false;
 bool advertencia2 = false;
@@ -27,13 +27,16 @@ DHT dht1(DHTPIN1,DHTTYPE);
   float temp;
   float pres;
 
+  
+Adafruit_BME280 bme; // use I2C interface
+
 
 void setup() {
  Serial.begin(9600);
  dht.begin();
  dht1.begin();
  Wire.begin();
- bmp.begin(0x76);
+ bme.begin();
   pinMode(pinV,OUTPUT);
   pinMode(pinV2,OUTPUT);
   pinMode(Ane,INPUT);
@@ -42,11 +45,12 @@ void setup() {
 void loop() {
   float tem1 = dht.readTemperature();
   float hum1 = dht.readHumidity();
- temp = bmp.readTemperature();
- pres = bmp.readPressure()/100;
+ temp = bme.readTemperature();
+ pres = bme.readPressure() /100;
+
  l1 = analogRead(Ane);
  volt = l1*(5000.0/1023.0); //voltaje (mv) obtenido del anemometro
- vel = 0.34 * volt; // funcion f(x) = 3.4(x) correspondiente al anemometro
+ vel = 0.34 * volt; // funcion f(x) = 0.34(x) correspondiente al anemometro
 
  
 
@@ -69,15 +73,12 @@ void loop() {
  Serial.println("PROBLEMA CON EL DHT11: REVISAR");
  } else {
  digitalWrite(pinV, HIGH);
- digitalWrite(pinV2, LOW);
+ digitalWrite(pinV2, HIGH);
  }
 
  if (isnan(temp) || isnan(pres)){
-  Serial.println("ERROR CON EL BMP280: REVISAR PUESTO QUE NO HAY REPUESTO");
+  Serial.println("ERROR CON EL BME280: REVISAR PUESTO QUE NO HAY REPUESTO");
  }
-
- 
-
 
   
   Serial.println("=====Datos generales=====");
