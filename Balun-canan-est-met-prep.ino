@@ -1,6 +1,5 @@
 //Hazme un favor y revisa el codigo mientas escuches:
 //Super Ponybeat-Mirai Star! 
-//Brony FOREVER
 #include <Adafruit_BME280.h>
 #include <Wire.h>
 #include <DHT.h>
@@ -11,6 +10,15 @@ int Ane = A3;
 int l1;
 float volt;
 float vel;
+int sensorA = A2;
+float lecturA;
+
+
+const float mmPulso = 0.3;
+float mmTotal = 0;
+int pluv = 3;
+int lectura;
+int estadoPost = 0; 
 
 
 bool advertencia1 = false;
@@ -40,11 +48,22 @@ void setup() {
   pinMode(pinV,OUTPUT);
   pinMode(pinV2,OUTPUT);
   pinMode(Ane,INPUT);
+  pinMode(pluv,INPUT_PULLUP);
+  pinMode(sensorA,INPUT);
 }
 
 void loop() {
-  float tem1 = dht.readTemperature();
-  float hum1 = dht.readHumidity();
+lectura = digitalRead(3);
+lecturA = analogRead(sensorA);
+
+if(lectura == HIGH && estadoPost == LOW){
+  mmTotal += mmPulso;
+}
+
+
+ 
+float tem1 = dht.readTemperature();
+float hum1 = dht.readHumidity();
  temp = bme.readTemperature();
  pres = bme.readPressure() /100;
 
@@ -58,9 +77,9 @@ void loop() {
  advertencia1 = true;
  Serial.println("Reinciando EL dht11");
  digitalWrite(pinV, LOW);
- delay(1000);
+ delay(2000);
  digitalWrite(pinV, HIGH);
- delay(1000);
+ delay(2000);
   tem1 = dht.readTemperature();
   hum1 = dht.readHumidity();
  } else if ((isnan(tem1) || isnan(hum1)) && advertencia1 == true && advertencia2 == false){
@@ -80,7 +99,8 @@ void loop() {
   Serial.println("ERROR CON EL BME280: REVISAR PUESTO QUE NO HAY REPUESTO");
  }
 
-  
+ 
+ 
   Serial.println("=====Datos generales=====");
   Serial.print("temperatura actual: ");
   Serial.print(temp);
@@ -91,7 +111,20 @@ void loop() {
    Serial.print("Velocidad del viento: ");
   Serial.print(vel);
   Serial.println("Km/h");
+   Serial.print("Precipitacion: ");
+  Serial.print(mmTotal);
+  Serial.println("mm");
   Serial.println("");
+
+
+if (lecturA >= 200){
+  Serial.println("===ESTA EMPEZANDO A LLOVER===");
+} else if(lecturA >= 600){
+  Serial.println("===DEFINITAVEMENTE ESTA LLOVIENDO===");
+} else if (lecturA == 0 && mmTotal >= 0.66){
+  Serial.println("===REVISAR EL SENSOR DE LLUVIA O POSIBLE MOVIMIENTO EN FALSO DEL BALANCIN DEL PLUVIOMETRO===");
+}
+
 
   Serial.println("=====Temperatura en sombra y humedad relativa====");
   Serial.print("temperatura actual exterior: ");
@@ -103,7 +136,8 @@ void loop() {
     Serial.println("");
 
 
- delay(4000);
+ delay(5000);
 
+estadoPost = lectura;
  }
 
