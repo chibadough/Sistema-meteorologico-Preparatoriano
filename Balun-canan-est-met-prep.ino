@@ -13,8 +13,6 @@ float volt;
 float vel;
 int sensorA = A2;
 float lecturA;
-int mq = A0;
-int lect;
 
 volatile int contadorPluv = 0;
 volatile unsigned long ultimoPulso = 0;
@@ -46,7 +44,7 @@ DHT dht1(DHTPIN1,DHTTYPE);
   
 Adafruit_BME280 bme; 
 
-#define PIN_MQ135 A2
+#define PIN_MQ135 A1
 
 MQ135 mq135_sensor(PIN_MQ135);
 
@@ -61,7 +59,7 @@ void setup() {
   pinMode(pinV2,OUTPUT);
   pinMode(Ane,INPUT);
   pinMode(pluv, INPUT_PULLUP);
-  pinMode(mq, INPUT);
+
 
 attachInterrupt(
   digitalPinToInterrupt(pluv),
@@ -84,7 +82,6 @@ void contarLluvia()
 
 void loop() {
 lecturA = analogRead(sensorA);
-lect = analogRead(mq);
 
 
 noInterrupts();
@@ -141,26 +138,20 @@ float hum1 = dht.readHumidity();
   Serial.println("ERROR CON EL BME280: REVISAR PUESTO QUE NO HAY REPUESTO");
  }
 
- 
 
-
-  
-  Serial.println("=====Datos generales=====");
-  Serial.print("temperatura actual: ");
+  Serial.print(" temperatura actual: ");
   Serial.print(temp);
-  Serial.println("C*");
-  Serial.print("presion atmosferica: ");
+  Serial.print("C*");
+  Serial.print(" presion atmosferica: ");
   Serial.print(pres);
-  Serial.println("hpa");
-   Serial.print("Velocidad del viento: ");
+  Serial.print("hpa ");
+   Serial.print( "Velocidad del viento: ");
   Serial.print(vel);
-  Serial.println("Km/h");
-   Serial.print("Precipitacion: ");
+  Serial.print(" Km/h ");
+   Serial.print(" Precipitacion: ");
   Serial.print(mmTotal);
-  Serial.println("mm");
-  Serial.println("");
-Serial.print("Pulsos: ");
-Serial.println(contadorPluv);
+  Serial.print(" mm ");
+  Serial.print("");
 
 if (lecturA >= 200){
   Serial.println("===ESTA EMPEZANDO A LLOVER===");
@@ -171,15 +162,13 @@ if (lecturA >= 200){
 }
 
 
-  Serial.println("=====Temperatura en sombra y humedad relativa====");
-  Serial.print("temperatura actual exterior: ");
+  Serial.print(" temperatura actual exterior: ");
   Serial.print(tem1);
-  Serial.println("C* ");
+  Serial.print(" C* ");
   Serial.print(" humedad relativa: ");
   Serial.print(hum1);
-  Serial.println("% ");
-    Serial.println("");
-    Serial.print("lectura mq; ");
+  Serial.print(" % ");
+    Serial.print("");
 
 float rzero = mq135_sensor.getRZero();
   float correctedRZero = mq135_sensor.getCorrectedRZero(temp, hum1);
