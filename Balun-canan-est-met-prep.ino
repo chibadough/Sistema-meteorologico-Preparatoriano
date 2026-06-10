@@ -1,5 +1,6 @@
 //Hazme un favor y revisa el codigo mientas escuches:
 //Super Ponybeat-Mirai Star! 
+#include <MQ135.h>
 #include <Adafruit_BME280.h>
 #include <Wire.h>
 #include <DHT.h>
@@ -12,13 +13,20 @@ float volt;
 float vel;
 int sensorA = A2;
 float lecturA;
+int mq = A0;
+int lect;
 
+volatile int contadorPluv = 0;
+volatile unsigned long ultimoPulso = 0;
+volatile unsigned long ultimoPulsoReal = 0;
 
 const float mmPulso = 0.3;
+
+
+const int pluv = 3;
+const int umbralTiempo = 300; 
+
 float mmTotal = 0;
-int pluv = 3;
-int lectura;
-int estadoPost = 0; 
 
 
 bool advertencia1 = false;
@@ -36,7 +44,11 @@ DHT dht1(DHTPIN1,DHTTYPE);
   float pres;
 
   
-Adafruit_BME280 bme; // use I2C interface
+Adafruit_BME280 bme; 
+
+#define PIN_MQ135 A2
+
+MQ135 mq135_sensor(PIN_MQ135);
 
 
 void setup() {
@@ -44,22 +56,52 @@ void setup() {
  dht.begin();
  dht1.begin();
  Wire.begin();
- bme.begin();
+ bme.begin(0X76);
   pinMode(pinV,OUTPUT);
   pinMode(pinV2,OUTPUT);
   pinMode(Ane,INPUT);
-  pinMode(pluv,INPUT_PULLUP);
+  pinMode(pluv, INPUT_PULLUP);
+  pinMode(mq, INPUT);
+
+attachInterrupt(
+  digitalPinToInterrupt(pluv),
+  contarLluvia,
+  FALLING
+);
   pinMode(sensorA,INPUT);
+} 
+void contarLluvia()
+{
+  unsigned long ahora = millis();
+
+  if (ahora - ultimoPulso > umbralTiempo)
+  {
+    contadorPluv++;
+    ultimoPulso = ahora;
+    ultimoPulsoReal = ahora;
+  }
 }
 
 void loop() {
-lectura = digitalRead(3);
 lecturA = analogRead(sensorA);
+lect = analogRead(mq);
 
-if(lectura == HIGH && estadoPost == LOW){
-  mmTotal += mmPulso;
+
+noInterrupts();
+int pulsos = contadorPluv;
+unsigned long ultimo = ultimoPulsoReal;
+interrupts();
+
+if (millis() - ultimo > 30000UL) 
+{
+  noInterrupts();
+  contadorPluv = 0;
+  interrupts();
+
+  pulsos = 0;
 }
 
+mmTotal = pulsos * mmPulso;
 
  
 float tem1 = dht.readTemperature();
@@ -100,7 +142,9 @@ float hum1 = dht.readHumidity();
  }
 
  
- 
+
+
+  
   Serial.println("=====Datos generales=====");
   Serial.print("temperatura actual: ");
   Serial.print(temp);
@@ -115,7 +159,8 @@ float hum1 = dht.readHumidity();
   Serial.print(mmTotal);
   Serial.println("mm");
   Serial.println("");
-
+Serial.print("Pulsos: ");
+Serial.println(contadorPluv);
 
 if (lecturA >= 200){
   Serial.println("===ESTA EMPEZANDO A LLOVER===");
@@ -134,10 +179,31 @@ if (lecturA >= 200){
   Serial.print(hum1);
   Serial.println("% ");
     Serial.println("");
+    Serial.print("lectura mq; ");
+
+float rzero = mq135_sensor.getRZero();
+  float correctedRZero = mq135_sensor.getCorrectedRZero(temp, hum1);
+  float resistance = mq135_sensor.getResistance();
+  float ppm = mq135_sensor.getPPM();
+  float correctedPPM = mq135_sensor.getCorrectedPPM(temp, hum1);
+
+  Serial.print("MQ135 RZero: ");
+  Serial.print(rzero);
+  Serial.print("\t Corrected RZero: ");
+  Serial.print(correctedRZero);
+  Serial.print("\t Resistance: ");
+  Serial.print(resistance);
+  Serial.print("\t PPM: ");
+  Serial.print(ppm);
+  Serial.print("\t Corrected PPM: ");
+  Serial.print(correctedPPM);
+  Serial.println("ppm");
+
 
 
  delay(5000);
 
-estadoPost = lectura;
+
  }
+
 
