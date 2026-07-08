@@ -107,8 +107,7 @@ float hum1 = dht.readHumidity();
  pres = bme.readPressure() /100;
 
  l1 = analogRead(Ane);
- volt = l1*(5000.0/1023.0); //voltaje (mv) obtenido del anemometro
- vel = 0.34 * volt; // funcion f(x) = 0.34(x) correspondiente al anemometro
+ vel = 0.78 * l1 - 5.46; // funcion f(x) = 0.78(x) - 5.46 correspondiente al anemometro
 
  
 
@@ -138,20 +137,16 @@ float hum1 = dht.readHumidity();
   Serial.println("ERROR CON EL BME280: REVISAR PUESTO QUE NO HAY REPUESTO");
  }
 
-
-  Serial.print(" temperatura actual: ");
   Serial.print(temp);
-  Serial.print("C*");
-  Serial.print(" presion atmosferica: ");
+  Serial.print(",");
+  Serial.print(tem1);
+  Serial.print(",");
   Serial.print(pres);
-  Serial.print("hpa ");
-   Serial.print( "Velocidad del viento: ");
+   Serial.print(",");
   Serial.print(vel);
-  Serial.print(" Km/h ");
-   Serial.print(" Precipitacion: ");
+   Serial.print(",");
   Serial.print(mmTotal);
-  Serial.print(" mm ");
-  Serial.print("");
+   Serial.print(",");
 
 if (lecturA >= 200){
   Serial.println("===ESTA EMPEZANDO A LLOVER===");
@@ -161,14 +156,8 @@ if (lecturA >= 200){
   Serial.println("===REVISAR EL SENSOR DE LLUVIA O POSIBLE MOVIMIENTO EN FALSO DEL BALANCIN DEL PLUVIOMETRO===");
 }
 
-
-  Serial.print(" temperatura actual exterior: ");
-  Serial.print(tem1);
-  Serial.print(" C* ");
-  Serial.print(" humedad relativa: ");
   Serial.print(hum1);
-  Serial.print(" % ");
-    Serial.print("");
+   Serial.print(",");
 
 float rzero = mq135_sensor.getRZero();
   float correctedRZero = mq135_sensor.getCorrectedRZero(temp, hum1);
@@ -176,22 +165,9 @@ float rzero = mq135_sensor.getRZero();
   float ppm = mq135_sensor.getPPM();
   float correctedPPM = mq135_sensor.getCorrectedPPM(temp, hum1);
 
-  Serial.print("MQ135 RZero: ");
-  Serial.print(rzero);
-  Serial.print("\t Corrected RZero: ");
-  Serial.print(correctedRZero);
-  Serial.print("\t Resistance: ");
-  Serial.print(resistance);
-  Serial.print("\t PPM: ");
-  Serial.print(ppm);
-  Serial.print("\t Corrected PPM: ");
-  Serial.print(correctedPPM);
-  Serial.println("ppm");
-
-
+  Serial.println(ppm);
 
  delay(5000);
-
 
  }
 
