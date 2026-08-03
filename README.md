@@ -4,6 +4,12 @@ Código de una estación meteorológica Balun Canan desarrollada por un grupo de
 
 ---
 
+## Desarrolladores
+
+Hardware (Programador Arduino, Diseño de circuitos y modelo 3D): ChibaDough (Juan Espinosa).
+Software (Programador del sistema de almacenamiento de datos en SQL con Python en Raspberry Pi 4): Roberto Bonifaz.
+
+---
 # Español
 
 ## Descripción del Proyecto
@@ -96,14 +102,6 @@ El proyecto fue creado como parte de una iniciativa educativa relacionada con:
 
 ---
 
-## Notas
-
-- Aun no se programa las funciones de mediciones de velocidad del viento y pluviales debido a la falta de estos sensores.
-- La precisión de los sensores puede variar dependiendo de las condiciones ambientales y la calibración.
-- Este repositorio funciona tanto como recurso de aprendizaje como referencia funcional de prototipo.
-
----
-
 ## Contribuciones
 
 Las sugerencias, mejoras y comentarios son bienvenidos.
@@ -128,6 +126,13 @@ Its purpose is to demonstrate how low-cost embedded systems can be used for clim
 The station was developed as a functional prototype capable of measuring environmental conditions both outdoors and in shaded areas for comparison and testing purposes.
 
 This repository contains the source code used to read sensor data, process environmental information, and display telemetry through Serial communication.
+
+---
+
+## Developers
+
+Hardware (Arduino programming, circuit design, and 3D modeling): ChibaDough (Juan Espinosa).
+Software (Programming the SQL data storage system using Python on Raspberry Pi 4): Roberto Bonifaz.
 
 ---
 
@@ -205,14 +210,6 @@ The project was created as part of an educational initiative connected to:
 - The STEM movement
 - Scientific and technological innovation programs
 - Educational prototype development for the MetLife Foundation
-
----
-
-## Notes
-
-- The wind speed and rainfall measurement functions have not yet been programmed due to the lack of these sensors.
-- Sensor accuracy may vary depending on environmental conditions and calibration.
-- This repository serves as both a learning resource and a functional prototype reference.
 
 ---
 
